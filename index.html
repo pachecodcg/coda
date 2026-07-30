@@ -13,119 +13,185 @@
     --silver:#A5ACAF;
     --green:#44D62C;
     --page:#EEEEEE;
+    --line:#dcdfe0;
+    --wash:#f0f2f3;
+    --body:#58676e;
   }
   *{box-sizing:border-box;margin:0;padding:0}
-  body{
-    background:var(--page);
-    font-family:"Source Sans 3",system-ui,sans-serif;
-    color:var(--navy);
-    -webkit-font-smoothing:antialiased;
-  }
+  body{background:var(--page);font-family:"Source Sans 3",system-ui,sans-serif;color:var(--navy);-webkit-font-smoothing:antialiased}
+  button{font:inherit;color:inherit;background:none;border:none;cursor:pointer;text-align:left}
+  :focus-visible{outline:2px solid var(--green);outline-offset:3px}
+  .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 
-  .hero{
-    position:relative;
-    background:var(--navy);
-    padding:64px 26px 56px;
-  }
-  .stripe{
-    position:absolute;left:0;bottom:0;width:100%;height:3px;background:var(--green);
-    transform:scaleX(0);transform-origin:left;
-    animation:stripeIn 0.9s cubic-bezier(.16,.84,.44,1) 0.15s forwards;
-  }
+  /* ================= hero ================= */
+  .hero{position:relative;background:var(--navy);padding:60px 26px 52px}
+  .stripe{position:absolute;left:0;bottom:0;width:100%;height:3px;background:var(--green);transform:scaleX(0);transform-origin:left;animation:stripeIn .9s cubic-bezier(.16,.84,.44,1) .15s forwards}
   @keyframes stripeIn{to{transform:scaleX(1)}}
-  .inner{max-width:1080px;margin:0 auto}
-
-  .pill{
-    display:inline-block;background:var(--green);color:var(--navy);
-    font-family:Montserrat,sans-serif;font-weight:800;font-size:10px;
-    letter-spacing:2px;text-transform:uppercase;
-    padding:5px 11px;border-radius:3px;
-  }
-  h1{
-    font-family:Montserrat,sans-serif;font-weight:700;
-    font-size:clamp(26px,4.6vw,42px);letter-spacing:-0.3px;
-    color:#ffffff;margin:20px 0 8px;line-height:1.1;
-  }
-  .subtitle{
-    font-family:Montserrat,sans-serif;font-weight:600;
-    font-size:clamp(13px,1.7vw,16px);color:var(--silver);
-  }
-  .when{
-    font-size:14px;font-weight:400;color:var(--silver);margin-top:8px;
-  }
-
-  .clock{
-    display:flex;flex-wrap:wrap;align-items:flex-end;
-    gap:clamp(20px,4.5vw,54px);margin-top:44px;
-  }
-  .num{
-    display:block;font-family:Montserrat,sans-serif;font-weight:800;
-    font-size:clamp(46px,10vw,92px);line-height:0.9;letter-spacing:-1.5px;
-    color:#ffffff;font-variant-numeric:tabular-nums;
-  }
-  .lab{
-    display:block;font-family:Montserrat,sans-serif;font-weight:700;
-    font-size:10px;letter-spacing:1.6px;text-transform:uppercase;
-    color:var(--silver);margin-top:13px;
-  }
+  .inner{max-width:1020px;margin:0 auto}
+  .pill{display:inline-block;background:var(--green);color:var(--navy);font-family:Montserrat,sans-serif;font-weight:800;font-size:10px;letter-spacing:2px;text-transform:uppercase;padding:5px 11px;border-radius:3px}
+  h1{font-family:Montserrat,sans-serif;font-weight:700;font-size:clamp(26px,4.6vw,42px);letter-spacing:-.3px;color:#fff;margin:20px 0 8px;line-height:1.1}
+  .subtitle{font-family:Montserrat,sans-serif;font-weight:600;font-size:clamp(13px,1.7vw,16px);color:var(--silver)}
+  .when{font-size:14px;color:var(--silver);margin-top:8px}
+  .clock{display:flex;flex-wrap:wrap;align-items:flex-end;gap:clamp(20px,4.5vw,54px);margin-top:40px}
+  .num{display:block;font-family:Montserrat,sans-serif;font-weight:800;font-size:clamp(44px,9.5vw,88px);line-height:.9;letter-spacing:-1.5px;color:#fff;font-variant-numeric:tabular-nums}
+  .lab{display:block;font-family:Montserrat,sans-serif;font-weight:700;font-size:10px;letter-spacing:1.6px;text-transform:uppercase;color:var(--silver);margin-top:13px}
   .unit.sec .num{font-size:clamp(22px,3.4vw,34px);color:var(--green);font-weight:700}
   .unit.sec .lab{color:var(--green);margin-top:10px}
 
-  .wrap{max-width:1080px;margin:0 auto;padding:30px 26px 40px}
-  .card{
-    background:#ffffff;border-radius:10px;border-top:3px solid var(--navy);
-    box-shadow:0 1px 5px rgba(0,51,89,0.07);
-    padding:26px;
-    opacity:0;transform:translateY(20px);
-    animation:fadeUp 0.5s ease 0.2s forwards;
-  }
-  @keyframes fadeUp{to{opacity:1;transform:translateY(0)}}
+  /* ================= sheet ================= */
+  .sheet{max-width:1020px;margin:0 auto;padding:34px 26px 10px}
+  .masthead{display:flex;align-items:center;justify-content:space-between;gap:16px;border-bottom:2px solid var(--navy);padding-bottom:12px}
+  .brand{display:flex;align-items:center;gap:13px;min-width:0}
+  .shield{width:40px;height:auto;flex:none;display:block}
+  .masthead h2{font-family:Montserrat,sans-serif;font-weight:700;font-size:clamp(19px,2.8vw,24px);letter-spacing:-.3px;line-height:1.1}
+  .masthead .month{font-family:Montserrat,sans-serif;font-weight:700;font-size:clamp(13px,2vw,17px);color:var(--silver);white-space:nowrap}
+  .fshield{width:34px;height:auto;display:block;margin:0 auto 12px;opacity:.85}
+  .intro{padding-top:20px}
+  .intro p{font-size:14.5px;line-height:1.75;color:var(--body);margin-bottom:14px}
 
-  .kicker{
-    font-family:Montserrat,sans-serif;font-weight:700;font-size:10px;
-    letter-spacing:1.5px;text-transform:uppercase;color:var(--green);
-    display:flex;align-items:center;margin-bottom:18px;
-  }
-  .kicker::before{
-    content:"";width:18px;height:2px;background:var(--green);margin-right:9px;flex:none;
-  }
+  section.block{padding-top:42px;margin-top:34px;border-top:1px solid var(--line)}
+  .kicker{font-family:Montserrat,sans-serif;font-weight:700;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--green);display:flex;align-items:center;justify-content:center}
+  .kicker::before{content:"";width:18px;height:2px;background:var(--green);margin-right:9px}
+  h3.sec{font-family:Montserrat,sans-serif;font-weight:700;font-size:20px;letter-spacing:-.3px;text-align:center;margin-top:9px}
+  .sub{text-align:center;font-size:14px;color:var(--body);margin-top:11px;line-height:1.7;max-width:72ch;margin-left:auto;margin-right:auto}
+  .note{text-align:center;font-size:12.5px;color:var(--silver);margin-top:8px;line-height:1.6;max-width:72ch;margin-left:auto;margin-right:auto}
+  .tap{text-align:center;font-family:Montserrat,sans-serif;font-weight:700;font-size:9px;letter-spacing:1.4px;text-transform:uppercase;color:var(--silver);margin-top:18px}
 
-  .ticks{display:flex;gap:3px;align-items:flex-end;height:34px}
-  .tick{flex:1 1 0;min-width:1px;background:var(--silver);height:11px;border-radius:2px 2px 0 0;opacity:.35}
-  .tick.done{background:var(--green);height:22px;opacity:1}
-  .tick.now{background:var(--navy);height:34px;opacity:1}
-  .railfoot{
-    display:flex;justify-content:space-between;margin-top:14px;
-    font-family:Montserrat,sans-serif;font-weight:600;font-size:10px;
-    letter-spacing:1.2px;text-transform:uppercase;color:var(--silver);
-  }
+  /* ================= key dates ================= */
+  .keys{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:26px}
+  .key{display:flex;flex-direction:column;background:#fff;border-radius:10px;border-top:3px solid var(--silver);box-shadow:0 1px 5px rgba(0,51,89,.07);padding:20px 22px 22px;transition:box-shadow .2s ease}
+  .key:hover{box-shadow:0 4px 16px rgba(0,51,89,.1)}
+  .key.is-next{border-top-color:var(--green)}
+  .key.is-final{border-top-color:var(--navy)}
+  .key .ktop{display:flex;align-items:baseline;gap:9px}
+  .key .n{font-family:Montserrat,sans-serif;font-weight:800;font-size:42px;line-height:1;font-variant-numeric:tabular-nums;letter-spacing:-1.5px}
+  .key .u{font-family:Montserrat,sans-serif;font-weight:700;font-size:9px;letter-spacing:1.4px;text-transform:uppercase;color:var(--silver);white-space:nowrap}
+  .key .t{display:block;font-family:Montserrat,sans-serif;font-weight:700;font-size:14.5px;margin-top:20px;line-height:1.35}
+  .key .dt{display:block;font-size:13px;color:var(--silver);margin-top:5px}
+  .key .d{display:none;font-size:13px;line-height:1.65;color:var(--body);margin-top:14px;padding-top:14px;border-top:1px solid var(--wash)}
+  .key.open .d{display:block}
 
-  footer{
-    position:relative;text-align:center;padding:26px 26px 44px;
-    font-size:12px;color:var(--silver);
-  }
-  footer::before{
-    content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);
-    width:min(680px,80%);height:1px;
-    background:linear-gradient(90deg,transparent,var(--silver),transparent);
-  }
-  .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+  /* ================= phase stepper ================= */
+  .steps{position:relative;margin-top:34px;display:grid;grid-template-columns:repeat(6,1fr)}
+  .steps::before{content:"";position:absolute;top:13px;left:calc(100%/12);right:calc(100%/12);height:2px;background:var(--line)}
+  .steps .done-line{position:absolute;top:13px;left:calc(100%/12);height:2px;background:var(--green)}
+  .step{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;padding:0 6px;text-align:center}
+  .dot{width:28px;height:28px;border-radius:50%;background:#fff;border:2px solid var(--line);display:flex;align-items:center;justify-content:center;font-family:Montserrat,sans-serif;font-weight:800;font-size:11px;color:var(--silver);transition:border-color .2s ease,color .2s ease,background .2s ease}
+  .step.past .dot{border-color:var(--green);background:var(--green);color:var(--navy)}
+  .step.on .dot{border-color:var(--navy);background:var(--navy);color:#fff}
+  .step .nm{font-family:Montserrat,sans-serif;font-weight:700;font-size:12px;margin-top:11px;color:var(--silver);line-height:1.3}
+  .step.past .nm,.step.on .nm{color:var(--navy)}
+  .phasebox{margin-top:26px;background:#fff;border-radius:10px;border-left:3px solid var(--navy);padding:20px 22px;min-height:96px}
+  .phasebox .h{font-family:Montserrat,sans-serif;font-weight:700;font-size:14px}
+  .phasebox .s{font-family:Montserrat,sans-serif;font-weight:700;font-size:9px;letter-spacing:1.4px;text-transform:uppercase;color:var(--green);margin-bottom:6px}
+  .phasebox p{font-size:14px;line-height:1.7;color:var(--body);margin-top:8px}
 
+  /* ================= program progress ================= */
+  .overall{display:flex;align-items:baseline;justify-content:center;gap:12px;margin-top:26px}
+  .overall b{font-family:Montserrat,sans-serif;font-weight:800;font-size:44px;letter-spacing:-1.5px;line-height:1}
+  .overall span{font-family:Montserrat,sans-serif;font-weight:700;font-size:10px;letter-spacing:1.4px;text-transform:uppercase;color:var(--silver)}
+  .ptable{margin-top:24px;border-top:1px solid var(--wash)}
+  .prow{border-bottom:1px solid var(--wash)}
+  .phead{width:100%;display:flex;align-items:center;gap:14px;padding:11px 2px}
+  .pname{width:290px;flex:none;font-family:Montserrat,sans-serif;font-weight:700;font-size:12.5px;line-height:1.3}
+  .pbar{flex:1;min-width:60px;height:16px;background:var(--wash);border-radius:3px;overflow:hidden}
+  .pbar i{display:block;height:100%;background:var(--navy);border-radius:3px}
+  .prow.is-ahead .pbar i{background:var(--green)}
+  .ppct{width:40px;flex:none;text-align:right;font-family:Montserrat,sans-serif;font-weight:700;font-size:12px;font-variant-numeric:tabular-nums}
+  .pbody{display:none;padding:2px 2px 18px}
+  .prow.open .pbody{display:block}
+  .checks{display:grid;grid-template-columns:repeat(auto-fit,minmax(236px,1fr));gap:7px 24px}
+  .chk{display:flex;align-items:flex-start;gap:9px;font-size:13px;color:var(--silver);line-height:1.5}
+  .chk.done{color:var(--navy)}
+  .chk i{flex:none;width:13px;height:13px;border-radius:2px;border:1.5px solid var(--line);margin-top:3px}
+  .chk.done i{background:var(--green);border-color:var(--green)}
+  .mlist{margin-top:24px;background:#fff;border-radius:10px;border-top:3px solid var(--navy);box-shadow:0 1px 5px rgba(0,51,89,.07);padding:22px 26px}
+  .mlist h4{font-family:Montserrat,sans-serif;font-weight:700;font-size:12px;letter-spacing:.2px;margin-bottom:14px}
+  .mlist ul{list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(246px,1fr));gap:8px 26px}
+  .mlist li{font-size:13px;color:var(--body);display:flex;gap:9px;align-items:flex-start;line-height:1.5}
+  .mlist li::before{content:"";flex:none;width:7px;height:7px;background:var(--green);border-radius:1px;margin-top:6px}
+
+  /* ================= snapshot ================= */
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px;margin-top:26px}
+  .stat{background:#fff;border-radius:10px;border-top:3px solid var(--navy);box-shadow:0 1px 5px rgba(0,51,89,.07);padding:20px;transition:box-shadow .2s ease}
+  .stat:hover{box-shadow:0 4px 16px rgba(0,51,89,.1)}
+  .stat.open{border-top-color:var(--green)}
+  .stat b{display:block;font-family:Montserrat,sans-serif;font-weight:800;font-size:38px;line-height:1;letter-spacing:-1.5px}
+  .stat .t{display:block;font-family:Montserrat,sans-serif;font-weight:700;font-size:11px;letter-spacing:1.3px;text-transform:uppercase;margin-top:10px}
+  .stat .d{display:none;font-size:13px;line-height:1.65;color:var(--body);margin-top:12px;padding-top:12px;border-top:1px solid var(--wash)}
+  .stat.open .d{display:block}
+
+  /* ================= gantt ================= */
+  .gantt{margin-top:30px;display:flex;align-items:stretch}
+  .glabels{width:158px;flex:none;padding-top:30px}
+  .glabels .gl{height:34px;display:flex;align-items:center;font-family:Montserrat,sans-serif;font-weight:700;font-size:11.5px;letter-spacing:.4px;text-transform:uppercase;color:var(--navy)}
+  .gplot{flex:1;position:relative;padding-top:30px;min-width:0}
+  .gaxis{position:absolute;top:0;left:0;right:0;height:30px}
+  .gmonth{position:absolute;top:2px;transform:translateX(-50%);font-family:Montserrat,sans-serif;font-weight:700;font-size:9.5px;letter-spacing:1.1px;text-transform:uppercase;color:var(--silver);white-space:nowrap}
+  .ggrid{position:absolute;top:30px;bottom:26px;width:1px;background:var(--wash)}
+  .gvline{position:absolute;top:24px;bottom:22px;width:2px;background:var(--navy)}
+  .gvline.today{background:var(--green);width:2px}
+  .gvcap{position:absolute;bottom:0;transform:translateX(-50%);font-family:Montserrat,sans-serif;font-weight:700;font-size:9px;letter-spacing:1px;text-transform:uppercase;white-space:nowrap}
+  .grow{height:34px;position:relative}
+  .grow .base{position:absolute;top:16px;left:0;right:0;height:2px;background:var(--wash)}
+  .gmark{position:absolute;top:9px;width:16px;height:16px;border-radius:50%;background:#fff;border:3px solid var(--silver);transform:translateX(-50%);cursor:pointer;transition:transform .15s ease}
+  .gmark:hover{transform:translateX(-50%) scale(1.18)}
+  .gmark.done{border-color:var(--green);background:var(--green)}
+  .gmark.next{border-color:var(--navy);background:var(--navy)}
+  .gfoot{height:26px}
+  .glegend{display:flex;gap:22px;flex-wrap:wrap;justify-content:center;margin-top:18px;font-size:12px;color:var(--silver)}
+  .glegend span{display:flex;align-items:center;gap:8px}
+  .glegend i{width:12px;height:12px;border-radius:50%;border:3px solid var(--silver);background:#fff}
+  .glegend i.done{border-color:var(--green);background:var(--green)}
+  .glegend i.next{border-color:var(--navy);background:var(--navy)}
+  .glegend i.bar{width:2px;height:14px;border-radius:0;border:none;background:var(--navy)}
+  .glegend i.today{width:2px;height:14px;border-radius:0;border:none;background:var(--green)}
+
+  .vdetail{margin-top:22px;background:#fff;border-radius:10px;border-left:3px solid var(--navy);padding:20px 22px;min-height:104px}
+  .vdetail .s{font-family:Montserrat,sans-serif;font-weight:700;font-size:9px;letter-spacing:1.4px;text-transform:uppercase;color:var(--green)}
+  .vdetail .h{font-family:Montserrat,sans-serif;font-weight:700;font-size:15px;margin-top:6px}
+  .vdetail .meta{font-size:13px;color:var(--silver);margin-top:4px}
+  .vdetail p{font-size:14px;line-height:1.7;color:var(--body);margin-top:10px}
+
+  /* ================= actions ================= */
+  .actions{display:grid;grid-template-columns:repeat(auto-fit,minmax(232px,1fr));gap:14px;margin-top:26px}
+  .act{background:#fff;border-radius:10px;border-top:3px solid var(--navy);box-shadow:0 1px 5px rgba(0,51,89,.07);padding:20px;transition:box-shadow .2s ease}
+  .act:hover{box-shadow:0 4px 16px rgba(0,51,89,.1)}
+  .act .n{display:block;font-family:Montserrat,sans-serif;font-weight:800;font-size:10px;letter-spacing:1.4px;color:var(--green)}
+  .act .t{display:block;font-family:Montserrat,sans-serif;font-weight:700;font-size:13.5px;margin-top:9px;line-height:1.35}
+  .act .d{display:block;font-size:13px;line-height:1.65;color:var(--body);margin-top:9px}
+
+  .thanks{background:#fff;border-radius:10px;border-top:3px solid var(--navy);box-shadow:0 1px 5px rgba(0,51,89,.07);padding:24px 26px;margin-top:26px}
+  .thanks p{font-size:14px;line-height:1.75;color:var(--body)}
+  .thanks .q{margin-top:12px;color:var(--navy)}
+  .thanks a{color:var(--navy);font-weight:600}
+
+  footer{position:relative;text-align:center;padding:32px 26px 48px;font-size:12px;color:var(--silver);margin-top:36px}
+  footer::before{content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);width:min(680px,80%);height:1px;background:linear-gradient(90deg,transparent,var(--silver),transparent)}
+
+  @media (max-width:820px){
+    .pname{width:200px;font-size:12px}
+    .glabels{width:118px}
+    .glabels .gl{font-size:10.5px}
+  }
   @media (max-width:640px){
-    .hero{padding:42px 18px 36px}
-    .wrap{padding:22px 18px 30px}
-    .card{padding:20px}
+    .hero{padding:42px 18px 34px}
+    .sheet{padding:26px 18px 10px}
     .clock{gap:18px 30px}
     .unit.sec{flex-basis:100%}
+    .steps{grid-template-columns:repeat(3,1fr);row-gap:22px}
+    .steps::before,.steps .done-line{display:none}
+    .phead{flex-wrap:wrap;gap:8px 12px}
+    .pname{width:100%}
+    .gmonth{font-size:8.5px;letter-spacing:.6px}
+    .glabels{width:96px}
   }
-  @media (prefers-reduced-motion:reduce){
-    *{animation:none !important;transition:none !important}
-    .card{opacity:1;transform:none}
-    .stripe{transform:scaleX(1)}
-  }
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.stripe{transform:scaleX(1)}}
   @media print{
-    body{background:#ffffff}
-    .card{box-shadow:none;break-inside:avoid;opacity:1;transform:none}
+    body{background:#fff}
+    .key .d,.pbody,.stat .d{display:block!important}
+    .key,.stat,.act,.mlist,.thanks{box-shadow:none}
+    section.block{break-inside:avoid}
   }
 </style>
 </head>
@@ -137,9 +203,8 @@
     <h1>CODA Countdown</h1>
     <p class="subtitle">Dental College of Georgia at Augusta University</p>
     <p class="when">Tuesday, March 2, 2027 at 8:00 am Eastern</p>
-
     <section class="clock" aria-label="Time remaining">
-      <h2 class="sr" id="srlive">Live countdown to the CODA date</h2>
+      <h2 class="sr" id="srlive">Live countdown to the CODA site visit</h2>
       <div class="unit"><span class="num" id="d">000</span><span class="lab">Days</span></div>
       <div class="unit"><span class="num" id="h">00</span><span class="lab">Hours</span></div>
       <div class="unit"><span class="num" id="m">00</span><span class="lab">Minutes</span></div>
@@ -149,68 +214,427 @@
   <div class="stripe"></div>
 </header>
 
-<main class="wrap">
-  <section class="card">
-    <p class="kicker">Weeks remaining</p>
-    <div class="ticks" id="ticks" aria-hidden="true"></div>
-    <div class="railfoot"><span id="railStart"></span><span id="railEnd"></span></div>
-  </section>
-</main>
+<div class="sheet">
 
-<footer>Dental College of Georgia at Augusta University</footer>
+  <div class="masthead">
+    <span class="brand">
+      <img class="shield" src="data:image/png;base64,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" alt="Augusta University" />
+      <h2>CODA Countdown</h2>
+    </span>
+    <span class="month" id="edition">July 2026</span>
+  </div>
+  <div class="intro">
+    <p>Welcome to this edition of CODA Countdown, our monthly update designed to keep the DCG community informed about our progress toward the upcoming Commission on Dental Accreditation (CODA) accreditation visit.</p>
+    <p>Accreditation preparation is a collaborative effort that involves faculty, staff, residents, students, and administrators across all programs. Each milestone completed brings us one step closer to demonstrating the strength of our educational programs and our ongoing commitment to continuous improvement.</p>
+  </div>
+
+  <section class="block">
+    <p class="kicker">Key dates</p>
+    <h3 class="sec">What is coming next</h3>
+    <div class="keys" id="keys"></div>
+    <p class="tap">Select a date for detail</p>
+  </section>
+
+  <section class="block">
+    <p class="kicker">The path</p>
+    <h3 class="sec">Accreditation timeline</h3>
+    <div class="steps" id="steps"></div>
+    <div class="phasebox" id="phasebox"></div>
+  </section>
+
+  <section class="block">
+    <p class="kicker">By program</p>
+    <h3 class="sec">Program progress</h3>
+    <p class="sub">Progress is tracked using defined accreditation milestones, detailed below.</p>
+    <p class="note">Progress varies by program based on scheduled mock site visit dates. Programs with earlier visits have advanced further in the preparation timeline as documents are reviewed and refined in advance of their visit.</p>
+    <div class="overall"><b id="avg">0%</b><span>average completion across nine programs</span></div>
+    <div class="ptable" id="ptable"></div>
+    <div class="mlist">
+      <h4>Accreditation milestones tracked include</h4>
+      <ul id="mlist"></ul>
+    </div>
+    <p class="tap">Select a program for its milestone detail</p>
+  </section>
+
+  <section class="block">
+    <p class="kicker">Where we stand</p>
+    <h3 class="sec">Snapshot</h3>
+    <div class="stats" id="stats"></div>
+    <p class="tap">Select a figure for detail</p>
+  </section>
+
+  <section class="block">
+    <p class="kicker">Readiness</p>
+    <h3 class="sec">Mock site visits</h3>
+    <p class="sub">Programs simulate the accreditation visit experience to identify strengths, address gaps, and build readiness.</p>
+    <div class="gantt">
+      <div class="glabels" id="glabels"></div>
+      <div class="gplot" id="gplot">
+        <div class="gaxis" id="gaxis"></div>
+      </div>
+    </div>
+    <div class="glegend">
+      <span><i class="done"></i> Completed</span>
+      <span><i class="next"></i> Up next</span>
+      <span><i></i> Scheduled</span>
+      <span><i class="today"></i> Today</span>
+      <span><i class="bar"></i> Key date</span>
+    </div>
+    <div class="vdetail" id="vdetail"></div>
+  </section>
+
+  <section class="block">
+    <p class="kicker">Action item of the month</p>
+    <h3 class="sec">Keep documentation current</h3>
+    <p class="sub">Accurate and up to date documentation is an important part of demonstrating our compliance with CODA standards. As we continue preparing for the accreditation visit, every member of the DCG community contributes to our readiness by ensuring that the materials supporting our programs accurately reflect current practices. Small updates made now can help prevent inconsistencies later and ensure our self-study documents, evidence, and daily operations tell the same story.</p>
+    <div class="actions" id="actions"></div>
+  </section>
+
+  <section class="block">
+    <p class="kicker">Thank you</p>
+    <h3 class="sec">To everyone contributing</h3>
+    <div class="thanks">
+      <p>Thank you to everyone contributing time, expertise, and effort to this important process. Accreditation preparation is a significant undertaking, and the progress we make each month reflects the dedication of our entire community. Together, we are preparing not only for a successful accreditation visit, but for continued excellence in dental education.</p>
+      <p class="q"><strong>Questions or feedback?</strong> Please contact <a href="mailto:DCG_OAC@augusta.edu">DCG_OAC@augusta.edu</a>.</p>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <img class="fshield" src="data:image/png;base64,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" alt="" />
+  Dental College of Georgia at Augusta University
+</footer>
 
 <script>
 (function(){
 
-  /* ---- edit if the date or runway changes ---- */
-  var TARGET = Date.UTC(2027, 2, 2, 13, 0, 0);   // March 2, 2027, 8:00 am Eastern
-  var START  = Date.UTC(2026, 6, 30, 12, 0, 0);  // where the runway begins
-  var WHEN   = "Tuesday, March 2, 2027 at 8:00 am Eastern";
-  /* ------------------------------------------- */
+  /* ==================== EDIT HERE ==================== */
 
+  var TARGET  = Date.UTC(2027, 2, 2, 13, 0, 0);
+  var WHEN    = "Tuesday, March 2, 2027 at 8:00 am Eastern";
+  var EDITION = "July 2026";
+
+  var AXIS_FROM = Date.UTC(2026, 5, 1);   // chart starts June 2026
+  var AXIS_TO   = Date.UTC(2027, 2, 31);  // chart ends March 2027
+
+  var KEYS = [
+    { t:"Mock site visit", dt:"September 10, 2026", short:"Mock visit", utc:Date.UTC(2026,8,10,12),
+      d:"Dental Medicine (DMD) hosts its mock site visit with Dr. Cecile Feldman and Dr. Fontinos Panagakos. Mock visits simulate the accreditation visit experience so programs can identify strengths, close gaps, and build familiarity with the process." },
+    { t:"CODA final document submission", dt:"November 16, 2026", short:"Submission", utc:Date.UTC(2026,10,16,12),
+      d:"Completed self-study documents and supporting materials are submitted to CODA for formal review. Everything referenced in the self-study needs to be accurate and verifiable by this date." },
+    { t:"CODA site visit", dt:"March 2, 2027", short:"Site visit", utc:TARGET, final:true,
+      d:"The DCG showcases program strengths and demonstrates compliance during the official accreditation visit." }
+  ];
+
+  /* current: which phase the college is in right now, 1 through 6 */
+  var CURRENT_PHASE = 3;
+  var PHASES = [
+    { t:"Build",       d:"Programs develop their self-study by evaluating compliance, gathering evidence, and documenting practices." },
+    { t:"Refine",      d:"Draft documents undergo review and feedback to ensure accuracy, completeness, and alignment with standards." },
+    { t:"Prepare",     d:"Programs simulate the accreditation visit experience to identify strengths, address gaps, and build readiness." },
+    { t:"Finalize",    d:"Feedback from reviews and mock visits is incorporated to complete and strengthen accreditation materials." },
+    { t:"Submit",      d:"Completed self-study documents and supporting materials are submitted to CODA for formal review." },
+    { t:"Demonstrate", d:"The DCG showcases program strengths and demonstrates compliance during the official accreditation visit." }
+  ];
+
+  var CHECKLIST = [
+    "Self-study planning completed","Initial self-study draft completed","Internal review completed",
+    "Program revisions completed","Evidence collection completed","Evidence verification completed",
+    "Leadership review completed","Mock site visit completed","Final revisions completed",
+    "Submission-ready document completed"
+  ];
+
+  /* done = how many of the ten milestones are complete. Verify against the newsletter. */
+  var PROGRAMS = [
+    { name:"Dental Medicine (DMD)", done:4 },
+    { name:"Dental Hygiene (BS-DH)", done:4 },
+    { name:"Advanced Education in General Dentistry (AEGD)", done:8 },
+    { name:"Advanced Education in Endodontics", done:4 },
+    { name:"Advanced Education in General Practice Residency (GPR)", done:8 },
+    { name:"Advanced Education in Orthodontics", done:4 },
+    { name:"Advanced Education in Pediatric Dentistry", done:5 },
+    { name:"Advanced Education in Periodontics", done:7 },
+    { name:"Advanced Education in Prosthodontics", done:5 }
+  ];
+
+  var STATS = [
+    { n:"1,365", t:"Pages reviewed", d:"The Office of Assessment and Compliance has completed an extensive review of self-study materials to ensure accuracy, consistency, and alignment with CODA standards. This effort represents hundreds of hours." },
+    { n:"55+", t:"Contributors", d:"Faculty, staff, and administrators have collaborated as lead writers and content experts throughout the self-study process. The collective knowledge and experience of the DCG community continues to shape strong, comprehensive accreditation materials." },
+    { n:"100s", t:"Evidence files", d:"Supporting documentation continues to be collected, reviewed, and aligned with CODA standards. Evidence management efforts help ensure programs can clearly demonstrate compliance and showcase the strength of their educational practices." },
+    { n:"3", t:"Mock visits completed", d:"AEGD, GPR, and Periodontics have completed mock site visits. Pediatric Dentistry submitted its self-study document for mock site visitor review. Faculty and residents participated in prep sessions designed to build familiarity with the site visit process." }
+  ];
+
+  var VISITS = [
+    { p:"AEGD / GPR", dt:"June 11 to 12, 2026", rev:"Dr. Jayson Huber, US Navy", utc:Date.UTC(2026,5,12,12),
+      s:"Mock site visit completed with no recommendations. Identified risks are being addressed by the program directors." },
+    { p:"Periodontics", dt:"July 30 to 31, 2026", rev:"Dr. Mia Geisinger, University of Alabama", utc:Date.UTC(2026,6,31,12),
+      s:"Self-study document submitted. Faculty and residents are being prepared for the upcoming mock visit." },
+    { p:"Pediatrics", dt:"August 24 to 25, 2026", rev:"Dr. Autumn Hurd, University of Oklahoma", utc:Date.UTC(2026,7,25,12),
+      s:"Mock reviewer is evaluating the self-study document. Evidence collection and organization continues." },
+    { p:"Prosthodontics", dt:"August 28, 2026", rev:"Dr. Carl Driscoll, University of Maryland", utc:Date.UTC(2026,7,28,12),
+      s:"Program director is reviewing and editing the self-study document prior to formal submission to the mock site visitor." },
+    { p:"DMD", dt:"September 10 to 11, 2026", rev:"Dr. Cecile Feldman and Dr. Fontinos Panagakos", utc:Date.UTC(2026,8,11,12),
+      s:"Initial document formatting and review are underway. DCG leadership is next to provide feedback." },
+    { p:"Endodontics", dt:"September 17 to 18, 2026", rev:"Dr. Garry Myers, VA Commonwealth", utc:Date.UTC(2026,8,18,12),
+      s:"DCG leadership review is in progress. The program director will conduct final review and revisions prior to submission." }
+  ];
+
+  var ACTIONS = [
+    { t:"Review policies and procedures", d:"Confirm that documents within your area of responsibility reflect current processes, expectations, and practices." },
+    { t:"Maintain accurate records", d:"Ensure assessment documentation, meeting records, evaluations, and other evidence are complete and accessible." },
+    { t:"Update program and course materials", d:"Identify and communicate outdated information in manuals, websites, forms, schedules, or other resources." },
+    { t:"Share changes and improvements", d:"Communicate updates, process changes, or new initiatives with department and program leadership." }
+  ];
+
+  /* ================== END EDIT HERE ================== */
+
+  var DAY = 86400000;
+  var SPAN = AXIS_TO - AXIS_FROM;
+  function pad(n,w){ n = String(n); while(n.length < w) n = '0' + n; return n; }
+  function daysTo(t){ return Math.max(0, Math.ceil((t - Date.now()) / DAY)); }
+  function pos(t){ return Math.min(100, Math.max(0, (t - AXIS_FROM) / SPAN * 100)); }
+
+  document.getElementById('edition').textContent = EDITION;
+
+  /* ---------- hero clock ---------- */
   var d = document.getElementById('d'), h = document.getElementById('h'),
       m = document.getElementById('m'), s = document.getElementById('s'),
       srlive = document.getElementById('srlive');
 
-  function pad(n, w){ n = String(n); while (n.length < w) n = '0' + n; return n; }
-
   function tick(){
     var diff = TARGET - Date.now();
     if (diff <= 0){
-      d.textContent = '000'; h.textContent = '00'; m.textContent = '00'; s.textContent = '00';
-      srlive.textContent = 'The CODA date has arrived.';
-      return;
+      d.textContent='000'; h.textContent='00'; m.textContent='00'; s.textContent='00';
+      srlive.textContent='The CODA date has arrived.'; return;
     }
-    var t = Math.floor(diff / 1000);
-    var days = Math.floor(t / 86400);
-    d.textContent = pad(days, 3);
-    h.textContent = pad(Math.floor(t / 3600) % 24, 2);
-    m.textContent = pad(Math.floor(t / 60) % 60, 2);
-    s.textContent = pad(t % 60, 2);
+    var t = Math.floor(diff/1000), days = Math.floor(t/86400);
+    d.textContent = pad(days,3);
+    h.textContent = pad(Math.floor(t/3600)%24,2);
+    m.textContent = pad(Math.floor(t/60)%60,2);
+    s.textContent = pad(t%60,2);
     srlive.textContent = days + ' days remaining until ' + WHEN;
   }
 
-  function board(){
-    var span = TARGET - START;
-    var weeks = Math.max(1, Math.round(span / 604800000));
-    var pct = Math.min(1, Math.max(0, (Date.now() - START) / span));
-    var current = Math.min(weeks - 1, Math.floor(pct * weeks));
-
-    var out = '';
-    for (var i = 0; i < weeks; i++){
-      var cls = i < current ? 'tick done' : (i === current ? 'tick now' : 'tick');
-      out += '<span class="' + cls + '"></span>';
-    }
-    document.getElementById('ticks').innerHTML = out;
-
-    var fmt = { month:'short', day:'numeric', year:'numeric' };
-    document.getElementById('railStart').textContent = new Date(START).toLocaleDateString('en-US', fmt);
-    document.getElementById('railEnd').textContent = new Date(TARGET).toLocaleDateString('en-US', fmt);
+  /* ---------- key dates ---------- */
+  function buildKeys(){
+    var box = document.getElementById('keys');
+    box.innerHTML = '';
+    var now = Date.now(), nextSet = false;
+    KEYS.forEach(function(k){
+      var left = daysTo(k.utc);
+      var isNext = !nextSet && k.utc > now && !k.final;
+      if (isNext) nextSet = true;
+      var b = document.createElement('button');
+      b.className = 'key' + (isNext ? ' is-next' : '') + (k.final ? ' is-final' : '');
+      b.setAttribute('aria-expanded','false');
+      b.innerHTML = '<span class="ktop"><span class="n">' + left + '</span>' +
+                    '<span class="u">' + (left === 1 ? 'day away' : 'days away') + '</span></span>' +
+                    '<span class="t">' + k.t + '</span>' +
+                    '<span class="dt">' + k.dt + '</span>' +
+                    '<span class="d">' + k.d + '</span>';
+      b.addEventListener('click', function(){
+        var open = b.classList.toggle('open');
+        b.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+      box.appendChild(b);
+    });
   }
 
-  tick(); board();
+  /* ---------- phase stepper ---------- */
+  function buildSteps(){
+    var box = document.getElementById('steps');
+    var out = document.getElementById('phasebox');
+    var line = document.createElement('div');
+    line.className = 'done-line';
+    var segs = PHASES.length - 1;
+    line.style.width = 'calc((100% - (100%/6)) * ' + ((CURRENT_PHASE - 1) / segs) + ')';
+    box.appendChild(line);
+
+    var nodes = [];
+    PHASES.forEach(function(p, i){
+      var st = document.createElement('button');
+      st.className = 'step' + (i + 1 < CURRENT_PHASE ? ' past' : '') + (i + 1 === CURRENT_PHASE ? ' on' : '');
+      st.setAttribute('aria-label', p.t);
+      st.innerHTML = '<span class="dot">' + pad(i + 1, 2) + '</span><span class="nm">' + p.t + '</span>';
+      st.addEventListener('click', function(){ show(i); });
+      box.appendChild(st);
+      nodes.push(st);
+    });
+
+    function show(i){
+      nodes.forEach(function(n, j){
+        n.classList.toggle('on', j === i);
+        n.classList.toggle('past', j < i);
+      });
+      var state = i + 1 < CURRENT_PHASE ? 'Completed' : (i + 1 === CURRENT_PHASE ? 'Where we are now' : 'Ahead');
+      out.innerHTML = '<div class="s">' + state + '</div><div class="h">' + pad(i + 1, 2) + '. ' + PHASES[i].t + '</div><p>' + PHASES[i].d + '</p>';
+    }
+    show(CURRENT_PHASE - 1);
+  }
+
+  /* ---------- program progress ---------- */
+  function buildPrograms(){
+    var box = document.getElementById('ptable');
+    var total = 0;
+    PROGRAMS.forEach(function(pr){
+      total += pr.done;
+      var pct = Math.round(pr.done / CHECKLIST.length * 100);
+      var row = document.createElement('div');
+      row.className = 'prow' + (pct >= 70 ? ' is-ahead' : '');
+      var checks = CHECKLIST.map(function(c,i){
+        return '<span class="chk' + (i < pr.done ? ' done' : '') + '"><i></i>' + c + '</span>';
+      }).join('');
+      row.innerHTML =
+        '<button class="phead" aria-expanded="false">' +
+          '<span class="pname">' + pr.name + '</span>' +
+          '<span class="pbar"><i style="width:' + pct + '%"></i></span>' +
+          '<span class="ppct">' + pct + '%</span>' +
+        '</button>' +
+        '<div class="pbody"><div class="checks">' + checks + '</div></div>';
+      var btn = row.querySelector('.phead');
+      btn.addEventListener('click', function(){
+        var open = row.classList.toggle('open');
+        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+      box.appendChild(row);
+    });
+    document.getElementById('avg').textContent =
+      Math.round(total / (PROGRAMS.length * CHECKLIST.length) * 100) + '%';
+    document.getElementById('mlist').innerHTML =
+      CHECKLIST.map(function(c){ return '<li>' + c + '</li>'; }).join('');
+  }
+
+  /* ---------- snapshot ---------- */
+  function buildStats(){
+    var box = document.getElementById('stats');
+    STATS.forEach(function(st){
+      var b = document.createElement('button');
+      b.className = 'stat';
+      b.setAttribute('aria-expanded','false');
+      b.innerHTML = '<b>' + st.n + '</b><span class="t">' + st.t + '</span><span class="d">' + st.d + '</span>';
+      b.addEventListener('click', function(){
+        var open = b.classList.toggle('open');
+        b.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+      box.appendChild(b);
+    });
+  }
+
+  /* ---------- gantt ---------- */
+  function buildGantt(){
+    var labels = document.getElementById('glabels');
+    var plot = document.getElementById('gplot');
+    var axis = document.getElementById('gaxis');
+    var detail = document.getElementById('vdetail');
+    labels.innerHTML = '';
+    axis.innerHTML = '';
+    Array.prototype.forEach.call(plot.querySelectorAll('.grow,.ggrid,.gvline,.gvcap,.gfoot'), function(n){ n.remove(); });
+
+    var names = ['Jun','Jul','Aug','Sep','Oct','Nov','Dec','Jan','Feb','Mar'];
+    var y = 2026, mo = 5;
+    for (var i = 0; i < names.length; i++){
+      var startU = Date.UTC(y, mo, 1);
+      var endU = Date.UTC(mo === 11 ? y + 1 : y, (mo + 1) % 12, 1);
+      var mid = startU + (Math.min(endU, AXIS_TO) - startU) / 2;
+
+      var lab = document.createElement('span');
+      lab.className = 'gmonth';
+      lab.style.left = pos(mid) + '%';
+      lab.textContent = names[i];
+      axis.appendChild(lab);
+
+      if (i > 0){
+        var grid = document.createElement('span');
+        grid.className = 'ggrid';
+        grid.style.left = pos(startU) + '%';
+        plot.appendChild(grid);
+      }
+      mo++; if (mo > 11){ mo = 0; y++; }
+    }
+
+    var now = Date.now(), nextSet = false;
+    var marks = [];
+    VISITS.forEach(function(v, i){
+      var gl = document.createElement('div');
+      gl.className = 'gl';
+      gl.textContent = v.p;
+      labels.appendChild(gl);
+
+      var row = document.createElement('div');
+      row.className = 'grow';
+      var done = v.utc < now;
+      var isNext = !done && !nextSet;
+      if (isNext) nextSet = true;
+      var mk = document.createElement('button');
+      mk.className = 'gmark' + (done ? ' done' : '') + (isNext ? ' next' : '');
+      mk.style.left = pos(v.utc) + '%';
+      mk.setAttribute('aria-label', v.p + ', ' + v.dt);
+      mk.title = v.p + ', ' + v.dt;
+      mk.addEventListener('click', function(){ showVisit(i, done, isNext); });
+      row.innerHTML = '<span class="base"></span>';
+      row.appendChild(mk);
+      plot.appendChild(row);
+      marks.push(mk);
+    });
+
+    var foot = document.createElement('div');
+    foot.className = 'gfoot';
+    plot.appendChild(foot);
+
+    KEYS.forEach(function(k){
+      var v = document.createElement('span');
+      v.className = 'gvline';
+      v.style.left = pos(k.utc) + '%';
+      v.title = k.t + ', ' + k.dt;
+      plot.appendChild(v);
+      var c = document.createElement('span');
+      c.className = 'gvcap';
+      c.style.left = pos(k.utc) + '%';
+      c.style.color = '#003359';
+      c.textContent = k.short;
+      plot.appendChild(c);
+    });
+
+    var td = document.createElement('span');
+    td.className = 'gvline today';
+    td.style.left = pos(now) + '%';
+    td.title = 'Today';
+    plot.appendChild(td);
+
+    function showVisit(i, done, isNext){
+      var v = VISITS[i];
+      var state = done ? 'Completed' : (isNext ? 'Up next' : 'Scheduled');
+      detail.innerHTML = '<div class="s">' + state + '</div><div class="h">' + v.p + '</div>' +
+                         '<div class="meta">' + v.dt + '  ·  ' + v.rev + '</div><p>' + v.s + '</p>';
+    }
+
+    var firstUpcoming = 0;
+    for (var j = 0; j < VISITS.length; j++){ if (VISITS[j].utc > now){ firstUpcoming = j; break; } }
+    showVisit(firstUpcoming, VISITS[firstUpcoming].utc < now, true);
+  }
+
+  /* ---------- actions ---------- */
+  function buildActions(){
+    var box = document.getElementById('actions');
+    ACTIONS.forEach(function(a, i){
+      var c = document.createElement('div');
+      c.className = 'act';
+      c.innerHTML = '<span class="n">' + pad(i + 1, 2) + '</span><span class="t">' + a.t + '</span><span class="d">' + a.d + '</span>';
+      box.appendChild(c);
+    });
+  }
+
+  tick();
+  buildKeys();
+  buildSteps();
+  buildPrograms();
+  buildStats();
+  buildGantt();
+  buildActions();
+
   setInterval(tick, 1000);
-  setInterval(board, 3600000);
+  setInterval(function(){ buildKeys(); buildGantt(); }, 3600000);
 })();
 </script>
 </body>
