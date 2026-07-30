@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>CODA Countdown | Dental College of Georgia at Augusta University</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#003359;
+    --silver:#A5ACAF;
+    --green:#44D62C;
+    --page:#EEEEEE;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    background:var(--page);
+    font-family:"Source Sans 3",system-ui,sans-serif;
+    color:var(--navy);
+    -webkit-font-smoothing:antialiased;
+  }
+
+  .hero{
+    position:relative;
+    background:var(--navy);
+    padding:64px 26px 56px;
+  }
+  .stripe{
+    position:absolute;left:0;bottom:0;width:100%;height:3px;background:var(--green);
+    transform:scaleX(0);transform-origin:left;
+    animation:stripeIn 0.9s cubic-bezier(.16,.84,.44,1) 0.15s forwards;
+  }
+  @keyframes stripeIn{to{transform:scaleX(1)}}
+  .inner{max-width:1080px;margin:0 auto}
+
+  .pill{
+    display:inline-block;background:var(--green);color:var(--navy);
+    font-family:Montserrat,sans-serif;font-weight:800;font-size:10px;
+    letter-spacing:2px;text-transform:uppercase;
+    padding:5px 11px;border-radius:3px;
+  }
+  h1{
+    font-family:Montserrat,sans-serif;font-weight:700;
+    font-size:clamp(26px,4.6vw,42px);letter-spacing:-0.3px;
+    color:#ffffff;margin:20px 0 8px;line-height:1.1;
+  }
+  .subtitle{
+    font-family:Montserrat,sans-serif;font-weight:600;
+    font-size:clamp(13px,1.7vw,16px);color:var(--silver);
+  }
+  .when{
+    font-size:14px;font-weight:400;color:var(--silver);margin-top:8px;
+  }
+
+  .clock{
+    display:flex;flex-wrap:wrap;align-items:flex-end;
+    gap:clamp(20px,4.5vw,54px);margin-top:44px;
+  }
+  .num{
+    display:block;font-family:Montserrat,sans-serif;font-weight:800;
+    font-size:clamp(46px,10vw,92px);line-height:0.9;letter-spacing:-1.5px;
+    color:#ffffff;font-variant-numeric:tabular-nums;
+  }
+  .lab{
+    display:block;font-family:Montserrat,sans-serif;font-weight:700;
+    font-size:10px;letter-spacing:1.6px;text-transform:uppercase;
+    color:var(--silver);margin-top:13px;
+  }
+  .unit.sec .num{font-size:clamp(22px,3.4vw,34px);color:var(--green);font-weight:700}
+  .unit.sec .lab{color:var(--green);margin-top:10px}
+
+  .wrap{max-width:1080px;margin:0 auto;padding:30px 26px 40px}
+  .card{
+    background:#ffffff;border-radius:10px;border-top:3px solid var(--navy);
+    box-shadow:0 1px 5px rgba(0,51,89,0.07);
+    padding:26px;
+    opacity:0;transform:translateY(20px);
+    animation:fadeUp 0.5s ease 0.2s forwards;
+  }
+  @keyframes fadeUp{to{opacity:1;transform:translateY(0)}}
+
+  .kicker{
+    font-family:Montserrat,sans-serif;font-weight:700;font-size:10px;
+    letter-spacing:1.5px;text-transform:uppercase;color:var(--green);
+    display:flex;align-items:center;margin-bottom:18px;
+  }
+  .kicker::before{
+    content:"";width:18px;height:2px;background:var(--green);margin-right:9px;flex:none;
+  }
+
+  .ticks{display:flex;gap:3px;align-items:flex-end;height:34px}
+  .tick{flex:1 1 0;min-width:1px;background:var(--silver);height:11px;border-radius:2px 2px 0 0;opacity:.35}
+  .tick.done{background:var(--green);height:22px;opacity:1}
+  .tick.now{background:var(--navy);height:34px;opacity:1}
+  .railfoot{
+    display:flex;justify-content:space-between;margin-top:14px;
+    font-family:Montserrat,sans-serif;font-weight:600;font-size:10px;
+    letter-spacing:1.2px;text-transform:uppercase;color:var(--silver);
+  }
+
+  footer{
+    position:relative;text-align:center;padding:26px 26px 44px;
+    font-size:12px;color:var(--silver);
+  }
+  footer::before{
+    content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);
+    width:min(680px,80%);height:1px;
+    background:linear-gradient(90deg,transparent,var(--silver),transparent);
+  }
+  .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+
+  @media (max-width:640px){
+    .hero{padding:42px 18px 36px}
+    .wrap{padding:22px 18px 30px}
+    .card{padding:20px}
+    .clock{gap:18px 30px}
+    .unit.sec{flex-basis:100%}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{animation:none !important;transition:none !important}
+    .card{opacity:1;transform:none}
+    .stripe{transform:scaleX(1)}
+  }
+  @media print{
+    body{background:#ffffff}
+    .card{box-shadow:none;break-inside:avoid;opacity:1;transform:none}
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="inner">
+    <span class="pill">Accreditation</span>
+    <h1>CODA Countdown</h1>
+    <p class="subtitle">Dental College of Georgia at Augusta University</p>
+    <p class="when">Tuesday, March 2, 2027 at 8:00 am Eastern</p>
+
+    <section class="clock" aria-label="Time remaining">
+      <h2 class="sr" id="srlive">Live countdown to the CODA date</h2>
+      <div class="unit"><span class="num" id="d">000</span><span class="lab">Days</span></div>
+      <div class="unit"><span class="num" id="h">00</span><span class="lab">Hours</span></div>
+      <div class="unit"><span class="num" id="m">00</span><span class="lab">Minutes</span></div>
+      <div class="unit sec"><span class="num" id="s">00</span><span class="lab">Seconds</span></div>
+    </section>
+  </div>
+  <div class="stripe"></div>
+</header>
+
+<main class="wrap">
+  <section class="card">
+    <p class="kicker">Weeks remaining</p>
+    <div class="ticks" id="ticks" aria-hidden="true"></div>
+    <div class="railfoot"><span id="railStart"></span><span id="railEnd"></span></div>
+  </section>
+</main>
+
+<footer>Dental College of Georgia at Augusta University</footer>
+
+<script>
+(function(){
+
+  /* ---- edit if the date or runway changes ---- */
+  var TARGET = Date.UTC(2027, 2, 2, 13, 0, 0);   // March 2, 2027, 8:00 am Eastern
+  var START  = Date.UTC(2026, 6, 30, 12, 0, 0);  // where the runway begins
+  var WHEN   = "Tuesday, March 2, 2027 at 8:00 am Eastern";
+  /* ------------------------------------------- */
+
+  var d = document.getElementById('d'), h = document.getElementById('h'),
+      m = document.getElementById('m'), s = document.getElementById('s'),
+      srlive = document.getElementById('srlive');
+
+  function pad(n, w){ n = String(n); while (n.length < w) n = '0' + n; return n; }
+
+  function tick(){
+    var diff = TARGET - Date.now();
+    if (diff <= 0){
+      d.textContent = '000'; h.textContent = '00'; m.textContent = '00'; s.textContent = '00';
+      srlive.textContent = 'The CODA date has arrived.';
+      return;
+    }
+    var t = Math.floor(diff / 1000);
+    var days = Math.floor(t / 86400);
+    d.textContent = pad(days, 3);
+    h.textContent = pad(Math.floor(t / 3600) % 24, 2);
+    m.textContent = pad(Math.floor(t / 60) % 60, 2);
+    s.textContent = pad(t % 60, 2);
+    srlive.textContent = days + ' days remaining until ' + WHEN;
+  }
+
+  function board(){
+    var span = TARGET - START;
+    var weeks = Math.max(1, Math.round(span / 604800000));
+    var pct = Math.min(1, Math.max(0, (Date.now() - START) / span));
+    var current = Math.min(weeks - 1, Math.floor(pct * weeks));
+
+    var out = '';
+    for (var i = 0; i < weeks; i++){
+      var cls = i < current ? 'tick done' : (i === current ? 'tick now' : 'tick');
+      out += '<span class="' + cls + '"></span>';
+    }
+    document.getElementById('ticks').innerHTML = out;
+
+    var fmt = { month:'short', day:'numeric', year:'numeric' };
+    document.getElementById('railStart').textContent = new Date(START).toLocaleDateString('en-US', fmt);
+    document.getElementById('railEnd').textContent = new Date(TARGET).toLocaleDateString('en-US', fmt);
+  }
+
+  tick(); board();
+  setInterval(tick, 1000);
+  setInterval(board, 3600000);
+})();
+</script>
+</body>
+</html>
