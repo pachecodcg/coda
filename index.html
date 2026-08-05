@@ -311,6 +311,10 @@
 
   /* ==================== EDIT HERE ==================== */
 
+  /* Google Sheet that feeds this page. Paste the long ID from the sheet's
+     address bar (docs.google.com/spreadsheets/d/THIS_PART/edit). */
+  var SHEET_ID = "1fh_n_ctheRm36_MtOe3RWqTsEtC5GuPStbb-CwTvnDY";
+
   var TARGET  = Date.UTC(2027, 2, 2, 13, 0, 0);
   var WHEN    = "Tuesday, March 2, 2027 at 8:00 am Eastern";
   var EDITION = "July 2026";
@@ -387,6 +391,10 @@
     { t:"Share changes and improvements", d:"Communicate updates, process changes, or new initiatives with department and program leadership." }
   ];
 
+  /* Everything above from EDITION down to ACTIONS is FALLBACK content:
+     it displays only if the Google Sheet cannot be reached. Month-to-month
+     updates happen in the sheet, not here. */
+
   /* ================== END EDIT HERE ================== */
 
   var DAY = 86400000;
@@ -395,7 +403,6 @@
   function daysTo(t){ return Math.max(0, Math.ceil((t - Date.now()) / DAY)); }
   function pos(t){ return Math.min(100, Math.max(0, (t - AXIS_FROM) / SPAN * 100)); }
 
-  document.getElementById('edition').textContent = EDITION;
 
   /* ---------- hero clock ---------- */
   var d = document.getElementById('d'), h = document.getElementById('h'),
@@ -625,16 +632,135 @@
     });
   }
 
-  tick();
-  buildKeys();
-  buildSteps();
-  buildPrograms();
-  buildStats();
-  buildGantt();
-  buildActions();
+  /* ---------- Google Sheet loader ---------- */
 
+  function esc(s){
+    return String(s == null ? '' : s)
+      .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+      .replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+  }
+
+  function parseCSV(text){
+    var rows = [], row = [], cur = '', inQ = false;
+    for (var i = 0; i < text.length; i++){
+      var ch = text[i];
+      if (inQ){
+        if (ch === '"'){
+          if (text[i+1] === '"'){ cur += '"'; i++; }
+          else inQ = false;
+        } else cur += ch;
+      } else if (ch === '"') inQ = true;
+      else if (ch === ','){ row.push(cur); cur = ''; }
+      else if (ch === '\n' || ch === '\r'){
+        if (ch === '\r' && text[i+1] === '\n') i++;
+        row.push(cur); cur = ''; rows.push(row); row = [];
+      } else cur += ch;
+    }
+    if (cur !== '' || row.length){ row.push(cur); rows.push(row); }
+    return rows;
+  }
+
+  /* Returns data rows found below the row whose first cell equals firstHeader. */
+  function tableRows(rows, firstHeader){
+    var start = -1;
+    for (var i = 0; i < rows.length; i++){
+      if ((rows[i][0] || '').trim() === firstHeader){ start = i + 1; break; }
+    }
+    if (start < 0) return [];
+    var out = [];
+    for (var j = start; j < rows.length; j++){
+      if ((rows[j][0] || '').trim() !== '') out.push(rows[j]);
+    }
+    return out;
+  }
+
+  function cell(r, i){ return (r[i] == null ? '' : String(r[i])).trim(); }
+
+  function utcNoon(iso){
+    var p = cell({0: iso}, 0).match(/^(\d{4})-(\d{1,2})-(\d{1,2})/);
+    return p ? Date.UTC(+p[1], +p[2] - 1, +p[3], 12) : NaN;
+  }
+
+  function fetchTab(name){
+    var url = 'https://docs.google.com/spreadsheets/d/' + SHEET_ID +
+              '/gviz/tq?tqx=out:csv&sheet=' + encodeURIComponent(name) +
+              '&cachebust=' + Date.now();
+    return fetch(url).then(function(r){
+      if (!r.ok) throw new Error(name + ' HTTP ' + r.status);
+      return r.text();
+    }).then(parseCSV);
+  }
+
+  function applySheet(t){
+    var settings = {}, i;
+    tableRows(t.settings, 'Setting').forEach(function(r){ settings[cell(r,0)] = cell(r,1); });
+    if (settings['Edition label']) EDITION = esc(settings['Edition label']);
+    var ph = parseInt(settings['Current phase (1-6)'], 10);
+    if (ph >= 1 && ph <= 6) CURRENT_PHASE = ph;
+
+    var progs = tableRows(t.programs, 'Program').map(function(r){
+      var n = parseInt(cell(r,1), 10);
+      return { name: esc(cell(r,0)), done: (n >= 0 && n <= 10) ? n : 0 };
+    });
+    if (progs.length) PROGRAMS = progs;
+
+    var stats = tableRows(t.snapshot, 'Big number').map(function(r){
+      return { n: esc(cell(r,0)), t: esc(cell(r,1)), d: esc(cell(r,2)) };
+    });
+    if (stats.length) STATS = stats;
+
+    var visits = tableRows(t.visits, 'Program').map(function(r){
+      return { p: esc(cell(r,0)), dt: esc(cell(r,1)), utc: utcNoon(cell(r,2)),
+               rev: esc(cell(r,3)), s: esc(cell(r,4)) };
+    }).filter(function(v){ return !isNaN(v.utc); });
+    visits.sort(function(a,b){ return a.utc - b.utc; });
+    if (visits.length) VISITS = visits;
+
+    var keys = tableRows(t.keys, 'Title').map(function(r){
+      return { t: esc(cell(r,0)), dt: esc(cell(r,1)), utc: utcNoon(cell(r,2)),
+               short: esc(cell(r,3)), d: esc(cell(r,4)) };
+    }).filter(function(k){ return !isNaN(k.utc); });
+    keys.sort(function(a,b){ return a.utc - b.utc; });
+    if (keys.length){ keys[keys.length - 1].final = true; KEYS = keys; }
+
+    var acts = tableRows(t.actions, 'Title').map(function(r){
+      return { t: esc(cell(r,0)), d: esc(cell(r,1)) };
+    });
+    if (acts.length) ACTIONS = acts;
+  }
+
+  var inited = false;
+  function initAll(){
+    if (inited) return;
+    inited = true;
+    document.getElementById('edition').textContent = EDITION;
+    buildKeys();
+    buildSteps();
+    buildPrograms();
+    buildStats();
+    buildGantt();
+    buildActions();
+    setInterval(function(){ buildKeys(); buildGantt(); }, 3600000);
+  }
+
+  /* Countdown starts immediately; content renders once the sheet answers. */
+  tick();
   setInterval(tick, 1000);
-  setInterval(function(){ buildKeys(); buildGantt(); }, 3600000);
+
+  if (SHEET_ID && SHEET_ID !== 'PASTE_SHEET_ID_HERE' && window.fetch){
+    Promise.all([
+      fetchTab('Settings'), fetchTab('Programs'), fetchTab('Snapshot'),
+      fetchTab('Mock Visits'), fetchTab('Key Dates'), fetchTab('Action Items')
+    ]).then(function(res){
+      applySheet({ settings: res[0], programs: res[1], snapshot: res[2],
+                   visits: res[3], keys: res[4], actions: res[5] });
+    }).catch(function(e){
+      if (window.console) console.warn('Sheet unavailable, using built-in content.', e);
+    }).then(initAll);
+    setTimeout(initAll, 6000);  /* safety net if the network hangs */
+  } else {
+    initAll();
+  }
 })();
 </script>
 </body>
