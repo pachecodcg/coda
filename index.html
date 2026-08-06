@@ -664,7 +664,8 @@
   function tableRows(rows, firstHeader){
     var start = -1;
     for (var i = 0; i < rows.length; i++){
-      if ((rows[i][0] || '').trim() === firstHeader){ start = i + 1; break; }
+      var c0 = (rows[i][0] || '').trim();
+      if (c0 === firstHeader || c0.slice(-firstHeader.length) === firstHeader){ start = i + 1; break; }
     }
     if (start < 0) return [];
     var out = [];
@@ -683,7 +684,7 @@
 
   function fetchTab(name){
     var url = 'https://docs.google.com/spreadsheets/d/' + SHEET_ID +
-              '/gviz/tq?tqx=out:csv&sheet=' + encodeURIComponent(name) +
+              '/gviz/tq?tqx=out:csv&headers=0&sheet=' + encodeURIComponent(name) +
               '&cachebust=' + Date.now();
     return fetch(url).then(function(r){
       if (!r.ok) throw new Error(name + ' HTTP ' + r.status);
